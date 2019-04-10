@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title Pug Register page
+    body
+        div
+            div
+                .text-center
+                    form(method='POST', action='/register')
+                        p
+                            label
+                                | Firstname:
+                                input.form-control(name='Firstname', type='text', placeholder='firstname')
+                        p
+                            label
+                                | Lastname:
+                                input.form-control(name='Lastname', type='text', placeholder='Lastname')
+                        p
+                            label
+                                | Email:
+                                input.form-control(name='Email', type='Email', placeholder='Email')
+                        p
+                            label
+                                | Password:
+                                input.form-control(name='Password', type='password', placeholder='Password')
+                        br
+                        input(type='submit', value='register')

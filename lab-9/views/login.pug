@@ -1,0 +1,20 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title Pug Login page
+    body
+        div
+            div
+                .text-center
+                    form(method='post', action='/login')
+                        p
+                            label
+                                | Email:
+                                input.form-control(name='Email', type='Email', placeholder='Email')
+                        p
+                            label
+                                | Password:
+                                input.form-control(name='password', type='password', placeholder='Password')
+                        br
+                        input(type='submit', value='Login')
