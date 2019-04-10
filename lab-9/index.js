@@ -5,13 +5,15 @@ var bodyParser = require('body-parser');
 var route= require('./route.js');
 //to parse requests
 app.use(bodyParser.urlencoded({ extended: true }));
-let userdata={};
+
 //get the middleware to cookieparser variable
 var cookieParser= require('cookie-parser');
 
 //use the middleware cookieparser
 app.use(cookieParser());
 
+
+app.use(express.static(__dirname + '/public'));
 //pugsetup
 app.set('view engine','pug');
 app.set('views','./views');
@@ -19,7 +21,12 @@ app.set('views','./views');
 
 //homepage
 app.get('/home',function(req,res){
-    res.render('home');
+    var Firstname='Firstname:'+(req.cookies.userdata.Firstname);
+var Lastname='Lastname:'+(req.cookies.userdata.Lastname);
+    var Email='Email:'+(req.cookies.userdata.Email);
+var Name=Firstname+' , '+Lastname+' , '+Email;
+    res.send(Name);
+
 });
 
 //loginpage
@@ -29,14 +36,21 @@ app.get('/login',function (req,res) {
 
 app.post('/login',function (req,res){
 console.log(req.body);
+if(req.body.Email===req.cookies.userdata.Email || req.body.Password===req.cookies.userdata.Password) {
+    res.redirect('/home');
+}
+else res.send('Invalid credentials');
+    });
 
-res.redirect('/home');
-    }
-);
+
 //Registerpage
 app.get('/register',function (req,res) {
     res.render('register');
+
 });
+
+
+
 
 
 app.post('/register',function(req,res) {
@@ -46,7 +60,6 @@ app.post('/register',function(req,res) {
     const Email = req.body.Email;
     const Password = req.body.Password;
     let user={Firstname: Firstname, Lastname: Lastname, Email: Email, Password: Password};
-    console.log(user);
     res.cookie("userdata",user);
     res.redirect('/login');
 });
@@ -60,17 +73,20 @@ let users= {
 };
 
 
-app.get('/setc',(req,res)=>{
-    res.cookie("userdata",users);
-    res.send('user data added to cookie');
+app.get('/',(req,res)=>{
+    res.redirect('/register');
 });
-
-app.get('/getc',(req,res) => {
-    res.send(req.cookies.userdata);
-});
-app.use('/',route);
-
-//res.clearCookie(cookieName);
+//
+// app.get('/setc',(req,res)=>{
+//     res.cookie("userdata",users);
+//     res.send('user data added to cookie');
+// });
+//
+// app.get('/getc',(req,res) => {
+//     res.send(req.cookies.userdata);
+// });
+//
+// //res.clearCookie(cookieName);
 
 
 app.listen(3000);

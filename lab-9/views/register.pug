@@ -1,28 +1,35 @@
-doctype html
-html(lang='en')
+html
     head
         meta(charset='utf-8')
         title Pug Register page
+        link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css', rel='stylesheet')
+        script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        link(rel='stylesheet', href='/style1.css')
+        // ---- Include the above in your HEAD tag --------
     body
-        div
-            div
-                .text-center
-                    form(method='POST', action='/register')
-                        p
-                            label
-                                | Firstname:
-                                input.form-control(name='Firstname', type='text', placeholder='firstname')
-                        p
-                            label
-                                | Lastname:
-                                input.form-control(name='Lastname', type='text', placeholder='Lastname')
-                        p
-                            label
-                                | Email:
-                                input.form-control(name='Email', type='Email', placeholder='Email')
-                        p
-                            label
-                                | Password:
-                                input.form-control(name='Password', type='password', placeholder='Password')
-                        br
-                        input(type='submit', value='register')
+        #register
+            h3.text-center.text-white.pt-5 Register form
+            .container
+                #register-row.row.justify-content-center.align-items-center
+                    #register-column.col-md-6
+                        #register-box.col-md-12
+                            form#register-form.form(action='/register', method='POST')
+                                h3.text-center.text-info register
+                                .form-group
+                                    label  Firstname:
+                                    br
+                                    input#Firstname.form-control(type='text', name='Firstname', placeholder='Firstname')
+                                .form-group
+                                    label Lastname:
+                                    br
+                                    input#Lastname.form-control(type='text', name='Lastname', placeholder='Lastname')
+                                .form-group
+                                    label  Email:
+                                    br
+                                    input#Email.form-control(type='Email', name='Email', placeholder='Email')
+                                .form-group
+                                    label  Password:
+                                    br
+                                    input#Password.form-control(type='Password', name='Password', placeholder='Password')
+                                input.btn.btn-info.btn-md(type='submit', value='submit')
